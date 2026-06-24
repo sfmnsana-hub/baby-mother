@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Baby & Mother Manager PRO</title>
+
+<style>
+
+:root{
+    --gold:#d4af37;
+    --gold2:#b8891f;
+    --dark:rgba(10,10,10,.72);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',Tahoma,sans-serif;
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.55),
+        rgba(0,0,0,.70)
+    ),
+    url('goldland.jpg') center center / cover no-repeat fixed;
+
+    color:#fff;
+    padding:15px;
+}
+
+.container{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+}
+
+.main-card{
+    background:rgba(10,10,10,.72);
+    border-radius:24px;
+    padding:22px;
+    border:1px solid rgba(212,175,55,.25);
+    box-shadow:0 10px 40px rgba(0,0,0,.8);
+    backdrop-filter:blur(8px);
+}
+
+.logo-wrap{
+    display:flex;
+    justify-content:center;
+    margin-bottom:18px;
+}
+
+.main-logo{
+    width:120px;
+    height:120px;
+    object-fit:contain;
+    border-radius:50%;
+    background:#111;
+    border:3px solid rgba(212,175,55,.45);
+    padding:10px;
+    box-shadow:0 0 30px rgba(212,175,55,.25);
+}
+
+.main-title{
+    text-align:center;
+    color:var(--gold);
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:25px;
+    letter-spacing:1px;
+}
+
+.section-title{
+    color:var(--gold);
+    font-size:18px;
+    font-weight:bold;
+    margin:25px 0 18px;
+    padding-bottom:10px;
+    border-bottom:2px solid rgba(212,175,55,.25);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
+label{
+    margin-bottom:7px;
+    color:var(--gold2);
+    font-size:13px;
+    font-weight:bold;
+}
+
+.input,
+.select-date{
+    width:100%;
+    padding:13px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    background:#1f1f1f;
+    color:#fff;
+    border:1px solid #444;
+    font-size:14px;
+    transition:.25s;
+}
+
+.input:focus,
+.select-date:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 15px rgba(212,175,55,.2);
+}
+
+.input-readonly{
+    background:rgba(212,175,55,.08);
+    border:1px solid rgba(212,175,55,.35);
+    text-align:center;
+    font-weight:bold;
+}
+
+.date-combo{
+    display:grid;
+    grid-template-columns:1fr 1fr 1.2fr;
+    gap:6px;
+}
+
+.level-box{
+    display:none;
+    animation:fade .35s ease;
+}
+
+.level-box.active{
+    display:block;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.btn-wrap{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
+}
+
+.btn-gold{
+    border:none;
+    cursor:pointer;
+    border-radius:40px;
+    padding:14px 28px;
+    font-size:13px;
+    font-weight:900;
+    color:#000;
+
+    background:
+    linear-gradient(
+        180deg,
+        var(--gold),
+        var(--gold2)
+    );
+
+    transition:.25s;
+}
+
+.btn-gold:hover{
+    transform:translateY(-2px) scale(1.03);
+    box-shadow:0 0 25px rgba(212,175,55,.35);
+}
+
+.upload-box{
+    border:2px dashed rgba(212,175,55,.35);
+    border-radius:18px;
+    padding:18px;
+    text-align:center;
+    background:rgba(255,255,255,.02);
+}
+
+.preview-wrap{
+    display:flex;
+    justify-content:center;
+    margin-top:15px;
+}
+
+.preview-wrap img{
+    width:230px;
+    max-width:100%;
+    border-radius:16px;
+    border:2px solid var(--gold2);
+    object-fit:cover;
+}
+
+.note{
+    margin-top:12px;
+    color:#aaa;
+    font-size:12px;
+}
+
+.success-box{
+    margin-top:25px;
+    background:rgba(0,255,120,.08);
+    border:1px solid rgba(0,255,120,.25);
+    color:#7dffb0;
+    padding:14px;
+    border-radius:14px;
+    text-align:center;
+    display:none;
+    font-weight:bold;
+}
+
+input.selected,
+button.selected{
+    box-shadow:0 0 20px gold;
+    border-color:gold !important;
+    transform:scale(1.05);
+}
+
+@media(max-width:768px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .main-title{
+        font-size:24px;
+    }
+
+    .main-card{
+        padding:16px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="main-card">
+
+<div class="logo-wrap">
+    <img src="logo.png" class="main-logo">
+</div>
+
+<div class="main-title">
+👶 BABY & MOTHER MANAGER PRO
+</div>
+
+<!-- LEVEL 1 -->
+
+<div id="level1" class="level-box active">
+
+<div class="section-title">
+LEVEL 1 — بيانات العائلة والبيبي
+</div>
+
+<div class="grid">
+
+<div class="field">
+<label>اسم الأم</label>
+<input type="text" id="motherName" class="input">
+</div>
+
+<div class="field">
+<label>اسم الأب</label>
+<input type="text" id="fatherName" class="input">
+</div>
+
+<div class="field">
+<label>اسم البيبي</label>
+<input type="text" id="babyName" class="input">
+</div>
+
+<div class="field">
+<label>الجدة من الأب</label>
+<input type="text" id="grandmaFather" class="input">
+</div>
+
+<div class="field">
+<label>الجدة من الأم</label>
+<input type="text" id="grandmaMother" class="input">
+</div>
+
+<div class="field">
+<label>الجد من الأب</label>
+<input type="text" id="grandpaFather" class="input">
+</div>
+
+<div class="field">
+<label>الجد من الأم</label>
+<input type="text" id="grandpaMother" class="input">
+</div>
+
+<div class="field">
+<label>عدد الأخوة</label>
+<input type="number" id="siblingsCount" class="input" min="0">
+</div>
+
+<div class="field">
+<label>جنس الأخوة</label>
+
+<select id="siblingsGender" class="input">
+<option>ذكور</option>
+<option>إناث</option>
+<option>مختلط</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="section-title">
+رفع صورة الإيكو
+</div>
+
+<div class="upload-box">
+
+<input type="file" id="echoUpload" class="input" accept="image/*">
+
+<div class="preview-wrap">
+<img id="echoPreview" style="display:none;">
+</div>
+
+<div class="note">
+يمكن رفع صورة الإيكو أو السونار الخاصة بالبيبي
+</div>
+
+</div>
+
+<div class="btn-wrap">
+
+<button class="btn-gold" onclick="goToLevel2()">
+الانتقال إلى LEVEL 2
+</button>
+
+</div>
+
+</div>
+
+<!-- LEVEL 2 -->
+
+<div id="level2" class="level-box">
+
+<div class="section-title">
+LEVEL 2 — بيانات الحمل
+</div>
+
+<div class="grid">
+
+<div class="field">
+
+<label>
+تاريخ آخر دورة (LMP)
+</label>
+
+<div class="date-combo">
+
+<select id="lmpDay" class="select-date" onchange="calculatePregnancy()"></select>
+
+<select id="lmpMonth" class="select-date" onchange="calculatePregnancy()"></select>
+
+<select id="lmpYear" class="select-date" onchange="calculatePregnancy()"></select>
+
+</div>
+
+</div>
+
+<div class="field">
+
+<label>
+يوم الترفيع (إتمام الشهر)
+</label>
+
+<input type="number"
+id="completionDay"
+class="input"
+placeholder="مثلاً 19"
+oninput="calculatePregnancy()">
+
+</div>
+
+<div class="field">
+
+<label>
+تاريخ الولادة المتوقع (EDD)
+</label>
+
+<input id="eddDisplay"
+class="input input-readonly"
+readonly>
+
+</div>
+
+<div class="field">
+
+<label>
+عمر الحمل (بالأسابيع)
+</label>
+
+<input id="weeksDisplay"
+class="input input-readonly"
+readonly>
+
+</div>
+
+<div class="field">
+
+<label>
+عمر الحمل (بالأيام)
+</label>
+
+<input id="daysDisplay"
+class="input input-readonly"
+readonly>
+
+</div>
+
+<div class="field">
+
+<label>
+الشهر الحالي
+</label>
+
+<input id="monthDisplay"
+class="input input-readonly"
+readonly>
+
+</div>
+
+</div>
+
+<div class="btn-wrap">
+
+<button class="btn-gold" onclick="backToLevel1()">
+العودة إلى LEVEL 1
+</button>
+
+<button class="btn-gold" onclick="saveAll()">
+حفظ البيانات
+</button>
+
+</div>
+
+<div id="successBox" class="success-box">
+✅ تم حفظ جميع البيانات بنجاح
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const level1=document.getElementById("level1");
+const level2=document.getElementById("level2");
+
+function goToLevel2(){
+
+    level1.classList.remove("active");
+    level2.classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+function backToLevel1(){
+
+    level2.classList.remove("active");
+    level1.classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+function populateDates(){
+
+    const day=document.getElementById("lmpDay");
+    const month=document.getElementById("lmpMonth");
+    const year=document.getElementById("lmpYear");
+
+    for(let i=1;i<=31;i++){
+
+        day.innerHTML += `
+        <option value="${i}">
+        ${i}
+        </option>
+        `;
+
+    }
+
+    const months=[
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر"
+    ];
+
+    months.forEach((m,index)=>{
+
+        month.innerHTML += `
+        <option value="${index}">
+        ${m}
+        </option>
+        `;
+
+    });
+
+    const currentYear=new Date().getFullYear();
+
+    for(let y=currentYear;y>=2018;y--){
+
+        year.innerHTML += `
+        <option value="${y}">
+        ${y}
+        </option>
+        `;
+
+    }
+
+}
+
+populateDates();
+
+function calculatePregnancy(){
+
+    const d=document.getElementById("lmpDay").value;
+    const m=document.getElementById("lmpMonth").value;
+    const y=document.getElementById("lmpYear").value;
+
+    if(!d || !m || !y){
+        return;
+    }
+
+    const lmpDate=new Date(y,m,d);
+
+    const today=new Date();
+
+    const diff=today-lmpDate;
+
+    const days=Math.floor(
+        diff/(1000*60*60*24)
+    );
+
+    const weeks=Math.floor(days/7);
+
+    const edd=new Date(lmpDate);
+
+    edd.setDate(
+        edd.getDate()+280
+    );
+
+    document.getElementById("weeksDisplay").value=
+    weeks+" أسبوع";
+
+    document.getElementById("daysDisplay").value=
+    days+" يوم";
+
+    document.getElementById("eddDisplay").value=
+    edd.toLocaleDateString('ar-EG');
+
+    const pregnancyMonth=
+    Math.min(9,Math.floor(weeks/4)+1);
+
+    document.getElementById("monthDisplay").value=
+    "الشهر "+pregnancyMonth;
+
+}
+
+function saveAll(){
+
+    document.getElementById("successBox").style.display="block";
+
+    setTimeout(()=>{
+
+        document.getElementById("successBox").style.display="none";
+
+    },3000);
+
+}
+
+document.getElementById("echoUpload")
+.addEventListener("change",function(e){
+
+    const file=e.target.files[0];
+
+    if(!file) return;
+
+    const reader=new FileReader();
+
+    reader.onload=function(ev){
+
+        const img=document.getElementById("echoPreview");
+
+        img.src=ev.target.result;
+
+        img.style.display="block";
+
+    }
+
+    reader.readAsDataURL(file);
+
+});
+
+</script>
+
+</body>
+</html>
