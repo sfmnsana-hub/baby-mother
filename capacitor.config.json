@@ -1,0 +1,6 @@
+{
+  "appId": "com.babymother.app",
+  "appName": "Baby Mother",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
