@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Test CI
 
 on:
   workflow_dispatch:
@@ -11,25 +11,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - name: Show files
+        run: ls -la
 
-      - name: Install dependencies
-        run: npm install
+      - name: Find project structure
+        run: find .
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Build (test step)
-        run: echo "workflow is working"
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-artifact
-          path: .
+      - name: Done
+        run: echo "workflow works"
