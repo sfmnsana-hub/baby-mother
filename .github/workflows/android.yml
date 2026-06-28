@@ -17,13 +17,21 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install || true
+        run: npm install
 
       - name: Install Capacitor
-        run: npm install @capacitor/core @capacitor/cli @capacitor/android || true
+        run: |
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "MyApp" "com.example.myapp"
 
-      - name: Sync Capacitor
-        run: npx cap sync android || true
+      - name: Build Web App
+        run: npm run build || echo "no build step"
+
+      - name: Sync Capacitor Android
+        run: npx cap add android || true
+
+      - name: Copy web to Android
+        run: npx cap copy android
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -31,9 +39,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Build Android APK
+      - name: Build APK
         working-directory: android
-        run: ./gradlew assembleDebug || true
+        run: ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
